@@ -41,6 +41,15 @@ const createBookModal = document.getElementById('add-book-dialog');
 const addBtn = document.getElementById('add-btn');
 
 addBtn.addEventListener('click', function(event) {
-    console.log('test');
     createBookModal.showModal();
 }); 
+
+//Add event listener for all buttons to close modals
+const closeModalBtns = document.getElementsByClassName('close-modal-btn');
+for(let i = 0; i < closeModalBtns.length; i++){
+    closeModalBtns[i].addEventListener('click', (event) => {
+        const button = event.target;
+        const parentModal = button.closest('dialog');
+        parentModal.close();
+    });
+}
