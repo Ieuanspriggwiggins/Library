@@ -38,3 +38,9 @@ function createBook(title, author, numberOfPages, currentPage, read = false){
 }
 
 const createBookModal = document.getElementById('add-book-dialog');
+const addBtn = document.getElementById('add-btn');
+
+addBtn.addEventListener('click', function(event) {
+    console.log('test');
+    createBookModal.showModal();
+}); 
