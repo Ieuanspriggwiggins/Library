@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 :root{
     --ink-black: #04151F;
     --dark-slate-grey: #183A37;
@@ -15,14 +17,45 @@ html, body{
 body{
     background-color: var(--ink-black);
     color: white;
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
 }
 
 /* Header Styles */
 header{
     width: 70%;
     margin: 40px auto;
+    display: flex;
+    
 }
 
 header h1{
     margin: 0;
+    font-weight: 600;
+    line-height: 30px;
+}
+
+/* Add button */
+.add-btn{
+    margin-left: 20px;
+    align-self: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: white;
+    border-radius: 100%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.add-btn:hover{
+    transform: rotate(90deg);
+    background-color: var(--burnt-orange);
+    color: white;
+}
+
+.add-btn span{
+    display: block;
+    aspect-ratio: 1/1;
 }
