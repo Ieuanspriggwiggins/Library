@@ -37,6 +37,7 @@ function createBook(title, author, numberOfPages, currentPage, read = false){
     booksArray.push(book);
 }
 
+//Handle the modal dialog for creating a new book.
 const createBookModal = document.getElementById('add-book-dialog');
 const addBtn = document.getElementById('add-btn');
 
@@ -53,3 +54,12 @@ for(let i = 0; i < closeModalBtns.length; i++){
         parentModal.close();
     });
 }
+
+//On create form submission
+const createBookForm = document.getElementById('create-book-form');
+createBookForm.addEventListener('submit', (event) => {
+    event.preventDefault(); //Stop the page from refreshing.
+    const form = event.target;
+    const dialog = form.closest('dialog');
+    dialog.close();
+});

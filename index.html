@@ -15,30 +15,30 @@
             <button class="close-modal-btn">x</button>
         </div>
         
-        <form>
+        <form id="create-book-form">
             <div class="form-row">
                 <label for="title-input">Title</label>
-                <input type="text" name="title-input" id="title-input">
+                <input type="text" name="title-input" id="title-input" required>
             </div>
 
             <div class="form-row">
                 <label for="author-input">Author</label>
-                <input type="text" name="author-input" id="author-input">
+                <input type="text" name="author-input" id="author-input" required>
             </div>
 
             <div class="form-row">
                 <label for="number-of-pages-input">Number of Pages</label>
-                <input type="number" name="number-of-pages-input" id="number-of-pages-input" min="0" value="0">
+                <input type="number" name="number-of-pages-input" id="number-of-pages-input" min="0" value="0" required>
             </div>
 
             <div class="form-row">
                 <label for="current-page-number">Current Page</label>
-                <input type="number" name="current-page-number" id="current-page-number" value="0">
+                <input type="number" name="current-page-number" id="current-page-number" value="0" required>
             </div>
 
             <div class="form-row-col">
                 <input type="button" value="Cancel" class="cancel-btn close-modal-btn">
-                <input type="button" value="Submit" class="submit-btn">
+                <input type="submit" value="Submit" class="submit-btn">
             </div>
         </form>
     </dialog>

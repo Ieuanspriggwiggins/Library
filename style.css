@@ -120,7 +120,7 @@ form input[type='text'], form input[type='number']{
     justify-content: space-between;
 }
 
-form input[type='button']{
+form input[type='button'], form input[type='submit']{
     border: none;
     border-radius: 0;
     padding: 10px 15px;
@@ -128,7 +128,7 @@ form input[type='button']{
     transition: 0.1s ease-in-out;
 }
 
-form input[type='button']:hover{
+form input[type='button']:hover, form input[type='submit']:hover{
     background-color: black;
     color: white;
 }
