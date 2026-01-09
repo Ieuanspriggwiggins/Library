@@ -62,4 +62,11 @@ createBookForm.addEventListener('submit', (event) => {
     const form = event.target;
     const dialog = form.closest('dialog');
     dialog.close();
+
+    const bookTitle = document.getElementById('title-input').value;
+    const bookAuthor = document.getElementById('author-input').value;
+    const bookNumberOfPages = document.getElementById('number-of-pages-input').value;
+    const bookCurrentPage = document.getElementById('current-page-number-input');
+
+    createBook(bookTitle, bookAuthor, bookNumberOfPages, bookCurrentPage);
 });
