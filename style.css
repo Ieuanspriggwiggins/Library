@@ -68,7 +68,7 @@ dialog::backdrop{
 dialog{
     min-width: 420px;
     border: none;
-    padding: 25px;
+    padding: 35px;
 }
 
 .modal-header{
@@ -107,8 +107,38 @@ form label{
     margin-bottom: 5px;
 }
 
-form input[type='text']{
+form input[type='text'], form input[type='number']{
     border-radius: 0;
     border: 1px solid rgba(0,0,0,0.5);
     padding: 7.5px;
+}
+
+.form-row-col{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+form input[type='button']{
+    border: none;
+    border-radius: 0;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+}
+
+form input[type='button']:hover{
+    background-color: black;
+    color: white;
+}
+
+.cancel-btn{
+    background-color: red;
+    color: white;
+}
+
+.submit-btn{
+    background-color: var(--dark-slate-grey);
+    color: white;
 }
