@@ -68,6 +68,7 @@ dialog::backdrop{
 dialog{
     min-width: 420px;
     border: none;
+    padding: 25px;
 }
 
 .modal-header{
@@ -89,4 +90,25 @@ dialog{
 
 .modal-header .close-modal-btn:hover{
     color: darkred;
+}
+
+/* Form styles */
+form{
+    margin-top: 20px;
+}
+
+form .form-row{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+form label{
+    margin-bottom: 5px;
+}
+
+form input[type='text']{
+    border-radius: 0;
+    border: 1px solid rgba(0,0,0,0.5);
+    padding: 7.5px;
 }
