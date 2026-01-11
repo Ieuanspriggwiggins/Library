@@ -134,11 +134,49 @@ form input[type='button']:hover, form input[type='submit']:hover{
 }
 
 .cancel-btn{
-    background-color: red;
+    background-color: darkred;
     color: white;
 }
 
 .submit-btn{
     background-color: var(--dark-slate-grey);
     color: white;
+}
+
+/* Books Container */
+.books-container{
+    width: 70%;
+    margin: 40px auto 0 auto;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    align-items: center;
+    gap: 30px;
+}
+
+.books-container .book{
+    padding: 15px;
+    border-radius: 10px;
+    background-color: var(--midnight-violet);
+    color: var(--wheat);
+}
+
+.book p{
+    font-size: 16px;
+}
+
+.book h3{
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+.edit-btn{
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    font-family: "Playfair Display", serif;
+    border-radius: 10px;
 }
