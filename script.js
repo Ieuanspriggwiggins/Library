@@ -14,6 +14,7 @@ function Book(title, author, numberOfPages, currentPage, read = false){
     this.numberOfPages = numberOfPages;
     this.currentPage = currentPage;
     this.read = read;
+    this.uuid = crypto.randomUUID();
 }
 
 /**
@@ -69,4 +70,20 @@ createBookForm.addEventListener('submit', (event) => {
     const bookCurrentPage = document.getElementById('current-page-number-input');
 
     createBook(bookTitle, bookAuthor, bookNumberOfPages, bookCurrentPage);
+    saveBooks();
 });
+
+/**
+ * Saves books to the local storage.
+ */
+function saveBooks(){
+    booksArrayString = JSON.stringify(booksArray);
+    localStorage.setItem('books', booksArrayString);
+}
+
+function loadBooks(){
+    const books = localStorage.getItem('books');
+    if(books == null) return;
+    booksArray = JSON.parse(books);
+}
+loadBooks();
