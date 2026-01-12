@@ -1,4 +1,5 @@
 let booksArray = [];
+const booksContainer = document.getElementById('books-container');
 
 /**
  * Book constructor for creating a book.
@@ -8,21 +9,16 @@ let booksArray = [];
  * @param {number} currentPage 
  * @param {boolean} read 
  */
-function Book(title, author, numberOfPages, currentPage, read = false){
+function Book(title, author, numberOfPages, currentPage){
     this.title = title;
     this.author = author;
     this.numberOfPages = numberOfPages;
     this.currentPage = currentPage;
-    this.read = read;
     this.uuid = crypto.randomUUID();
 }
 
-/**
- * Calculates what percentage of the total book has been read.
- * @returns A percentage of the pages total read.
- */
-Book.prototype.getPercentageRead = function(){
-    return (this.currentPage / this.numberOfPages) * 100;
+function getBookPercentageRead(book){
+    return Math.floor((book.currentPage / book.numberOfPages) * 100);
 }
 
 /**
@@ -33,8 +29,8 @@ Book.prototype.getPercentageRead = function(){
  * @param {number} currentPage 
  * @param {boolean} read 
  */
-function createBook(title, author, numberOfPages, currentPage, read = false){
-    const book = new Book(title, author, numberOfPages, currentPage, read);
+function createBook(title, author, numberOfPages, currentPage){
+    const book = new Book(title, author, numberOfPages, currentPage);
     booksArray.push(book);
 }
 
@@ -67,11 +63,61 @@ createBookForm.addEventListener('submit', (event) => {
     const bookTitle = document.getElementById('title-input').value;
     const bookAuthor = document.getElementById('author-input').value;
     const bookNumberOfPages = document.getElementById('number-of-pages-input').value;
-    const bookCurrentPage = document.getElementById('current-page-number-input');
+    const bookCurrentPage = document.getElementById('current-page-number-input').value;
 
     createBook(bookTitle, bookAuthor, bookNumberOfPages, bookCurrentPage);
     saveBooks();
 });
+function drawBooks(){
+    //clear the container first.
+    booksContainer.innerHTML = '';
+    for(let i = 0; i < booksArray.length; i++){
+        const bookElement = generateBookCard(booksArray[i]);
+        booksContainer.appendChild(bookElement);
+    };
+}
+
+function generateBookCard(book){
+    const bookDiv = document.createElement('div');
+    bookDiv.classList.add('book');
+
+    const bookHeading = document.createElement('h3');
+    bookHeading.innerText = book.title;
+    bookDiv.appendChild(bookHeading);
+    
+    const authorPara = document.createElement('p');
+    authorPara.innerText = book.author;
+    bookDiv.appendChild(authorPara);
+
+    const totalPagesPara = document.createElement('p');
+    totalPagesPara.innerText = `Total Pages: ${book.numberOfPages}`;
+    bookDiv.appendChild(totalPagesPara);
+
+    const pagesReadPara = document.createElement('p');
+    pagesReadPara.innerText = `Pages Read: ${book.currentPage}`;
+    bookDiv.appendChild(pagesReadPara);
+
+    const percentageReadPara = document.createElement('p');
+    percentageReadPara.innerText = `Percentage Read: ${getBookPercentageRead(book)}%`;
+    bookDiv.appendChild(percentageReadPara);
+
+    const editBtn = document.createElement('button');
+    editBtn.classList.add('edit-btn');
+    editBtn.innerText = 'Edit';
+    bookDiv.appendChild(editBtn);
+
+    return bookDiv;
+}
+
+//<div class="book">
+//    <h3>The Hunger Games</h3>
+//    <p>Suzane colins</p>
+//    <p>Total Pages: 300</p>
+//    <p>Pages Read:  150</p>
+//    <p>Percentage Read: 50%</p>
+//    <p>Status: Read</p>
+//    <button class="edit-btn">Edit</button>
+//</div>
 
 /**
  * Saves books to the local storage.
@@ -89,5 +135,6 @@ function loadBooks(){
     const books = localStorage.getItem('books');
     if(books == null) return;
     booksArray = JSON.parse(books);
+    drawBooks();
 }
 loadBooks();
