@@ -81,6 +81,10 @@ function saveBooks(){
     localStorage.setItem('books', booksArrayString);
 }
 
+/**
+ * Loads the books from the local storage as a string and converts it to the array of objects required.
+ * @returns Return to escape function if the books item is not set in localstorage.
+ */
 function loadBooks(){
     const books = localStorage.getItem('books');
     if(books == null) return;
