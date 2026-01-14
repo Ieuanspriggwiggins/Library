@@ -1,5 +1,19 @@
 let booksArray = [];
 const booksContainer = document.getElementById('books-container');
+const createBookModal = document.getElementById('add-book-dialog');
+const editBookModal = document.getElementById('edit-book-dialog');
+const addBtn = document.getElementById('add-btn');
+
+const bookTitleInput = document.getElementById('title-input');
+const bookAuthorInput = document.getElementById('author-input');
+const bookNumberOfPagesInput = document.getElementById('number-of-pages-input');
+const bookCurrentPageInput = document.getElementById('current-page-number-input');
+
+const editBookTitleInput = document.getElementById('edit-title-input');
+const editBookAuthorInput = document.getElementById('edit-author-input');
+const editBookNumberOfPagesInput = document.getElementById('edit-number-of-pages-input');
+const editBookCurrentPageInput = document.getElementById('edit-current-page-number-input');
+
 
 /**
  * Book constructor for creating a book.
@@ -35,9 +49,6 @@ function createBook(title, author, numberOfPages, currentPage){
 }
 
 //Handle the modal dialog for creating a new book.
-const createBookModal = document.getElementById('add-book-dialog');
-const addBtn = document.getElementById('add-btn');
-
 addBtn.addEventListener('click', function(event) {
     createBookModal.showModal();
 }); 
@@ -60,10 +71,10 @@ createBookForm.addEventListener('submit', (event) => {
     const dialog = form.closest('dialog');
     dialog.close();
 
-    const bookTitle = document.getElementById('title-input').value;
-    const bookAuthor = document.getElementById('author-input').value;
-    const bookNumberOfPages = document.getElementById('number-of-pages-input').value;
-    const bookCurrentPage = document.getElementById('current-page-number-input').value;
+    const bookTitle = bookTitleInput.value;
+    const bookAuthor = bookAuthorInput.value;
+    const bookNumberOfPages = bookNumberOfPagesInput.value;
+    const bookCurrentPage = bookCurrentPageInput.value;
 
     createBook(bookTitle, bookAuthor, bookNumberOfPages, bookCurrentPage);
     saveBooks();
@@ -89,6 +100,7 @@ function drawBooks(){
 function generateBookCard(book){
     const bookDiv = document.createElement('div');
     bookDiv.classList.add('book');
+    bookDiv.dataset.id = book.uuid;
 
     const bookHeading = document.createElement('h3');
     bookHeading.innerText = book.title;
@@ -113,20 +125,41 @@ function generateBookCard(book){
     const editBtn = document.createElement('button');
     editBtn.classList.add('edit-btn');
     editBtn.innerText = 'Edit';
+    editBtn.addEventListener('click', onEditBtnClick);
     bookDiv.appendChild(editBtn);
 
     return bookDiv;
 }
 
-//<div class="book">
-//    <h3>The Hunger Games</h3>
-//    <p>Suzane colins</p>
-//    <p>Total Pages: 300</p>
-//    <p>Pages Read:  150</p>
-//    <p>Percentage Read: 50%</p>
-//    <p>Status: Read</p>
-//    <button class="edit-btn">Edit</button>
-//</div>
+/**
+ * On edit button click, open the modal for editting the book.
+ * @param {Event} event 
+ */
+function onEditBtnClick(event){
+    const editBtn = event.target;
+    const uuid = editBtn.closest('.book').dataset.id;
+    const book = getBookByUuid(uuid);
+
+    editBookTitleInput.value = book.title;
+    editBookAuthorInput.value = book.author;
+    editBookNumberOfPagesInput.value = book.numberOfPages;
+    editBookCurrentPageInput.value = book.currentPage;
+    editBookModal.showModal();
+}
+
+/**
+ * Gets a book by it's uuid from the array
+ * @param {string} uuid 
+ * @returns The book object if found, null if not found.
+ */
+function getBookByUuid(uuid){
+    for(let i = 0; i < booksArray.length; i++){
+        if(booksArray[i].uuid === uuid){
+            return booksArray[i];
+        }
+    }
+    return null;    
+}
 
 /**
  * Saves books to the local storage.
@@ -134,6 +167,7 @@ function generateBookCard(book){
 function saveBooks(){
     booksArrayString = JSON.stringify(booksArray);
     localStorage.setItem('books', booksArrayString);
+    drawBooks();
 }
 
 /**
