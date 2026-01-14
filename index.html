@@ -9,6 +9,41 @@
     <script defer src="script.js"></script>
 </head>
 <body>
+    <dialog id="edit-book-dialog">
+        <div class="modal-header">
+            <h2>Edit Book</h2>
+            <button class="close-modal-btn">x</button>
+        </div>
+
+        <form id="edit-book-form">
+            <div class="form-row">
+                <label for="edit-title-input">Title</label>
+                <input type="text" name="edit-title-input" id="edit-title-input">
+            </div>
+
+            <div class="form-row">
+                <label for="edit-author-input">Author</label>
+                <input type="text" name="edit-author-input" id="edit-author-input" required>
+            </div>
+
+            <div class="form-row">
+                <label for="edit-number-of-pages-input">Number of Pages</label>
+                <input type="number" name="edit-number-of-pages-input" id="edit-number-of-pages-input" min="0" value="0" required>
+            </div>
+
+            <div class="form-row">
+                <label for="edit-current-page-number-input">Current Page</label>
+                <input type="number" name="edit-current-page-number-input" id="edit-current-page-number-input" value="0" required>
+            </div>
+
+            <div class="form-row-col">
+                <input type="button" value="Delete" id="delete-btn" class="cancel-btn">
+                <input type="submit" value="Submit" class="submit-btn">
+            </div>
+        </form>
+    </dialog>
+
+    </dialog>
     <dialog id="add-book-dialog">
         <div class="modal-header">
             <h2>Add Book</h2>
