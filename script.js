@@ -2,7 +2,9 @@ let booksArray = [];
 const booksContainer = document.getElementById('books-container');
 const createBookModal = document.getElementById('add-book-dialog');
 const editBookModal = document.getElementById('edit-book-dialog');
+
 const addBtn = document.getElementById('add-btn');
+const deleteBtn = document.getElementById('delete-btn');
 
 const bookTitleInput = document.getElementById('title-input');
 const bookAuthorInput = document.getElementById('author-input');
@@ -52,6 +54,8 @@ function createBook(title, author, numberOfPages, currentPage){
 addBtn.addEventListener('click', function(event) {
     createBookModal.showModal();
 }); 
+
+deleteBtn.addEventListener('click', onDeleteBtnClick);
 
 //Add event listener for all buttons to close modals
 const closeModalBtns = document.getElementsByClassName('close-modal-btn');
@@ -139,6 +143,7 @@ function onEditBtnClick(event){
     const editBtn = event.target;
     const uuid = editBtn.closest('.book').dataset.id;
     const book = getBookByUuid(uuid);
+    editBookModal.dataset.uuid = uuid;
 
     editBookTitleInput.value = book.title;
     editBookAuthorInput.value = book.author;
@@ -146,6 +151,20 @@ function onEditBtnClick(event){
     editBookCurrentPageInput.value = book.currentPage;
     editBookModal.showModal();
 }
+
+/**
+ * Event for when a delete button is pressed.
+ * @param {event} event 
+ */
+function onDeleteBtnClick(event){
+    const btn = event.target;
+    const dialog = btn.closest('dialog');
+    const uuid = dialog.dataset.uuid;
+    deleteBookByUuid(uuid);
+    saveBooks();
+    editBookModal.close();
+}
+
 
 /**
  * Gets a book by it's uuid from the array
@@ -158,7 +177,19 @@ function getBookByUuid(uuid){
             return booksArray[i];
         }
     }
-    return null;    
+    return null;
+}
+
+/**
+ * Deletes a book by it's uuid.
+ * @param {string} uuid 
+ */
+function deleteBookByUuid(uuid){
+    for(let i = 0; i < booksArray.length; i++){
+        if(booksArray[i].uuid == uuid){
+            booksArray.splice(i, 1);
+        }
+    }
 }
 
 /**
