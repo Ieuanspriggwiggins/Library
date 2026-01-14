@@ -3,6 +3,9 @@ const booksContainer = document.getElementById('books-container');
 const createBookModal = document.getElementById('add-book-dialog');
 const editBookModal = document.getElementById('edit-book-dialog');
 
+const createBookForm = document.getElementById('create-book-form');
+const editBookForm = document.getElementById('edit-book-form');
+
 const addBtn = document.getElementById('add-btn');
 const deleteBtn = document.getElementById('delete-btn');
 
@@ -34,6 +37,9 @@ function Book(title, author, numberOfPages, currentPage){
 }
 
 function getBookPercentageRead(book){
+    if(book.numberOfPages == 0){
+        return 100;
+    }
     return Math.floor((book.currentPage / book.numberOfPages) * 100);
 }
 
@@ -68,7 +74,6 @@ for(let i = 0; i < closeModalBtns.length; i++){
 }
 
 //On create form submission
-const createBookForm = document.getElementById('create-book-form');
 createBookForm.addEventListener('submit', (event) => {
     event.preventDefault(); //Stop the page from refreshing.
     const form = event.target;
@@ -81,6 +86,23 @@ createBookForm.addEventListener('submit', (event) => {
     const bookCurrentPage = bookCurrentPageInput.value;
 
     createBook(bookTitle, bookAuthor, bookNumberOfPages, bookCurrentPage);
+    saveBooks();
+});
+
+editBookForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const bookTitle = editBookTitleInput.value;
+    const bookAuthor = editBookAuthorInput.value;
+    const bookNumberOfPages = editBookNumberOfPagesInput.value;
+    const bookCurrentPage = editBookCurrentPageInput.value;
+
+    const book = getBookByUuid(editBookModal.dataset.uuid);
+
+    book.title = bookTitle;
+    book.author = bookAuthor;
+    book.numberOfPages = bookNumberOfPages;
+    book.currentPage = bookCurrentPage;
+    editBookModal.close();
     saveBooks();
 });
 
@@ -167,7 +189,6 @@ function onDeleteBtnClick(event){
         editBookModal.close();
     }
 }
-
 
 /**
  * Gets a book by it's uuid from the array
