@@ -1,5 +1,5 @@
 # Library
-This project was created to practice objects and prototypes in JavaScript. It allows the user to keep track of their book collection!
+This project was created to practice objects and DOM manipulation in JS.
 
 The colour scheme for the project was generated using coolors.co! Link for scheme can be found below:
 
