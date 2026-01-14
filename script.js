@@ -160,9 +160,12 @@ function onDeleteBtnClick(event){
     const btn = event.target;
     const dialog = btn.closest('dialog');
     const uuid = dialog.dataset.uuid;
-    deleteBookByUuid(uuid);
-    saveBooks();
-    editBookModal.close();
+    const confirmation = confirm("Are you sure you want to delete this book? ");
+    if(confirmation){
+        deleteBookByUuid(uuid);
+        saveBooks();
+        editBookModal.close();
+    }
 }
 
 
