@@ -68,6 +68,10 @@ createBookForm.addEventListener('submit', (event) => {
     createBook(bookTitle, bookAuthor, bookNumberOfPages, bookCurrentPage);
     saveBooks();
 });
+
+/**
+ * Creates the books display.
+ */
 function drawBooks(){
     //clear the container first.
     booksContainer.innerHTML = '';
@@ -77,6 +81,11 @@ function drawBooks(){
     };
 }
 
+/**
+ * Creates a single book card and returns the parent div element with containing elements.
+ * @param {Book} book 
+ * @returns HTML Element containing the book
+ */
 function generateBookCard(book){
     const bookDiv = document.createElement('div');
     bookDiv.classList.add('book');
